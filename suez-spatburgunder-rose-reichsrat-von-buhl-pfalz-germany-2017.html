@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://img.totgoose.ru/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Sûez Spätburgunder Rosé - Тот Ещё Гусь</title>
+  
+
+    
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(145deg, #faf8f5 0%, #f0ebe3 100%);
+            background-attachment: fixed;
+        }
+                .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: linear-gradient(145deg, #faf8f5 0%, #f0ebe3 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .logo-image {
+            width: 177px;
+            height: 230px;
+            margin-right: 10px;
+        }
+
+        .header-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-nav a {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 30px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .header-nav a:hover {
+            color: #d9534f;
+        }
+
+        .header-contacts {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .phone-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .phone-link i {
+            color: #d9534f;
+        }
+
+        .address-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .address-link:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin-top: 8px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .social-icons a {
+            color: #333;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #d9534f;
+        }
+
+        @media (max-width: 960px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .header-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        .wine-card {
+            max-width: 650px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #faf8f5 0%, #f0ebe3 100%);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 
+                        0 0 0 1px rgba(139, 69, 69, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wine-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #8B4513, #A52A2A, #8B4513);
+        }
+        
+        .wine-image {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            display: block;
+            margin: 0 auto 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            border: 3px solid #fff;
+            outline: 1px solid rgba(139, 69, 69, 0.2);
+        }
+        
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, #8B4513 0%, #A52A2A 100%);
+            color: #fff;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 3px 10px rgba(139, 69, 69, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .wine-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2d1810;
+            margin-bottom: 8px;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .wine-brand {
+            font-size: 20px;
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 6px;
+            text-align: center;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        
+        .wine-origin {
+            font-size: 16px;
+            color: #6b5344;
+            margin-bottom: 6px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .vintage-year {
+            font-size: 18px;
+            font-weight: 700;
+            color: #A52A2A;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 5px 15px;
+            background: rgba(165, 42, 42, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(139, 69, 69, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #8B4513;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(139, 69, 69, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .section-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #4a3728;
+        }
+        
+        .spec-item {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #4a3728;
+            display: flex;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(139, 69, 69, 0.1);
+        }
+        
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            font-weight: 700;
+            color: #8B4513;
+            min-width: 120px;
+        }
+        
+        .tasting-grid { 
+            display: grid; 
+            gap: 12px; 
+        }
+        
+        .tasting-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #4a3728;
+            border-left: 4px solid #A52A2A;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tasting-item:hover {
+            transform: translateX(4px);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tasting-label {
+            font-weight: 800;
+            color: #8B4513;
+            margin-right: 8px;
+        }
+        
+        .price-box {
+            background: linear-gradient(135deg, #8B4513 0%, #A52A2A 100%);
+            color: #fff;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(139, 69, 69, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .price-label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            opacity: 0.95;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .price-value {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .price-disclaimer {
+            font-size: 11px;
+            margin-top: 10px;
+            opacity: 0.75;
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        
+        .action-button {
+            display: block;
+            background: linear-gradient(135deg, #8B4513 0%, #A52A2A 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 30px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 17px;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(139, 69, 69, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(139, 69, 69, 0.5);
+            background: linear-gradient(135deg, #A52A2A 0%, #8B4513 100%);
+        }
+        
+        .footer-links {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(139, 69, 69, 0.2);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b5344;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 2px solid rgba(139, 69, 69, 0.3);
+            border-radius: 12px;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer-link svg {
+            width: 18px;
+            height: 18px;
+            fill: #8B4513;
+            transition: fill 0.2s;
+        }
+        
+        .footer-link:hover {
+            color: #8B4513;
+            transform: translateY(-2px);
+            border-color: #8B4513;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 3px 10px rgba(139, 69, 69, 0.2);
+        }
+        
+        .footer-link:hover svg {
+            fill: #A52A2A;
+        }
+        
+        .map-container {
+            margin-top: 30px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            border: 3px solid #fff;
+            outline: 1px solid rgba(139, 69, 69, 0.2);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .wine-card {
+                padding: 25px;
+            }
+            .wine-title {
+                font-size: 26px;
+            }
+            .price-value {
+                font-size: 36px;
+            }
+        }
+    </style>
+<!-- 🔹 SEO: Тот ещё Гусь | totgoose.ru -->
+<!-- 🔹 Основные мета-теги -->
+<title>Гастрокафе «Тот ещё Гусь» в Москве | Авторская кухня, Валовая 26</title>
+<meta name="description" content="Гастрокафе «Тот ещё Гусь» в Москве: Винный гастроресторан с характером на Павелецкой. Адрес: ул. Валовая, 26. Бронь: +7 (999) 926-26-88. Работаем с 12:00 до позднего вечера.">
+<meta name="keywords" content="гастрокафе Москва, Тот ещё Гусь, ресторан Валовая, авторская кухня, бронь стола Москва, воскресный бранч,Лионская кухня, редкие блюда, 300+ винных этикеток, totgoose">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://totgoose.ru/">
+
+<!-- 🔹 Open Graph / Facebook / VK -->
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Гастрокафе «Тот ещё Гусь» | Москва, Валовая 26">
+<meta property="og:description" content="Авторская кухня, атмосферные вечера и гастрономические эксперименты. Забронируйте стол: +7 (999) 926-26-88">
+<meta property="og:url" content="https://totgoose.ru/">
+<meta property="og:site_name" content="Тот ещё Гусь">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://img.totgoose.ru/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- 🔹 Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Гастрокафе «Тот ещё Гусь» | Москва">
+<meta name="twitter:description" content="Авторская кухня и уютная атмосфера на Валовой, 26. Бронь: +7 (999) 926-26-88">
+<meta name="twitter:image" content="https://totgoose.ru/images/og-image.jpg">
+
+<!-- 🔹 Геоданные -->
+<meta name="geo.region" content="RU-MOW">
+<meta name="geo.placename" content="Москва">
+<meta name="geo.position" content="55.7425;37.6353">
+<meta name="ICBM" content="55.7425, 37.6353">
+
+<!-- 🔹 Structured Data: Restaurant (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Тот ещё Гусь",
+  "alternateName": "totgoose",
+  "image": "https://img.totgoose.ru/og-image.jpg",
+  "@id": "https://totgoose.ru",
+  "url": "https://totgoose.ru",
+  "telephone": "+79999262688",
+  "email": "goose@totgoose.ru",
+  "priceRange": "₽₽",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Валовая, 26",
+    "addressLocality": "Москва",
+    "postalCode": "115054",
+    "addressCountry": "RU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 55.7425,
+    "longitude": 37.6353
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "12:00", "closes": "24:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "12:00", "closes": "02:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "13:00", "closes": "02:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "14:00", "closes": "23:00" }
+  ],
+  "sameAs": [
+    "https://vk.com/totgooserestocafe",
+    "https://t.me/totgooserestocafe",
+    "https://totgoose.ru"
+  ],
+  "menu": "https://totgoose.ru/menu",
+  "acceptsReservations": "true",
+  "servesCuisine": ["Russian","European","Author"],
+  "description": "Гастрокафе «Тот ещё Гусь» — авторская кухня, атмосферные вечера и гастрономические эксперименты в центре Москвы."
+}
+</script>
+</head>
+<link rel="icon" href="https://img.totgoose.ru/favicon.ico" type="image/x-icon">
+<body>
+<header class="header">
+        <a href="https://totgoose.ru" class="header-logo">
+            <img src="https://img.totgoose.ru/goose.png" alt="Гусь" class="logo-image">
+        </a>
+
+        <nav class="header-nav">
+            <ul>
+                <li><a href="https://menu.totgoose.ru" target="_blank">МЕНЮ | </a></li>
+                <li><a href="https://menu.totgoose.ru/menu_dinner.html" target="_blank">ОБЕД | </a></li>
+                <li><a href="https://wine.totgoose.ru" target="_blank">ВИННАЯ КАРТА</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-contacts">
+            <a href="tel:+79999262688" class="phone-link">
+                <i class="fas fa-phone-alt"></i>
+                +7 (9999) 26-26-88
+            </a>
+            
+            <a href="https://yandex.ru/maps/org/tot_yeshchyo_gus/240625638253/" target="_blank" class="address-link">
+                <i class="fas fa-map-marker-alt" style='font-size:24px ; color:red'></i>
+                Мск , Валовая , 26
+            </a>
+
+            <div class="social-icons">
+                <a href="https://vk.com/totgooserestocafe" target="_blank" title="VK">
+                    <i class='fab fa-vk' style='font-size:30px;color:red'></i>
+                </a>
+                <a href="https://t.me/totgooserestocafe" target="_blank" title="Telegram">
+                    <i class='fab fa-telegram-plane' style='font-size:30px;color:red'></i>
+                </a>
+                <a href="https://www.totgoose.ru/blog" target="_blank" title="Blog">
+                   <i class='fas fa-blog' style='font-size:30px;color:red'></i>
+                </a>
+                <a href="https://www.totgoose.ru" target="_blank" title="totgoose.ru">
+                   <i class="fa fa-internet-explorer" style="font-size:30px;color:red"></i>
+                </a>
+                <a href="mailto:totgoose@ya.ru" target="_blank" title="totgoose@ya.ru">
+                  <i class="fa fa-envelope" style="font-size:30px;color:red"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="wine-card">
+   
+        <img src="https://img.totgoose.ru/suez-von-buhl.webp" alt="Sûez Spätburgunder Rosé" class="wine-image">
+        
+        <div class="badges">
+            <span class="badge">Pfalz Spätburgunder Rosé</span>
+            <span class="badge">ROSE</span>
+            <span class="badge">GREAT PINK</span>
+            <span class="badge">2017</span>
+        </div>
+        
+        <h1 class="wine-title">Sûez Spätburgunder Rosé</h1>
+        <h2 class="wine-brand">REICHSRAT VON BUHL</h2>
+        <p class="wine-origin">Pfalz, Germany</p>
+        <p class="vintage-year">2017</p>
+        
+        <div class="section">
+            <h3 class="section-title">Описание</h3>
+            <p class="section-text">Немецкое розе из Пфальца. Пино Нуар. Райхсрат фон Бюль — историческое хозяйство. Винтаж 2017.</p>
+            <p class="section-text">Премиум немецкое розе: вишня, красные ягоды, минеральность и изящная структура. Сложное, элегантное и очень гастрономичное.</p>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">Характеристики</h3>
+            <div class="spec-item">
+                <span class="spec-label">Регион:</span>
+                <span>Pfalz, Germany</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Виноград:</span>
+                <span>Spätburgunder (Pinot Noir)</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Объем:</span>
+                <span>750ml</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Крепость:</span>
+                <span>12.5%</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Стиль:</span>
+                <span>Pfalz Spätburgunder Rosé</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Производитель:</span>
+                <span>Reichsrat von Buhl</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">Дегустационные заметки</h3>
+            <div class="tasting-grid">
+                <div class="tasting-item">
+                    <span class="tasting-label">Цвет:</span>
+                    <span>Бледно-розовый с медными оттенками</span>
+                </div>
+                <div class="tasting-item">
+                    <span class="tasting-label">Аромат:</span>
+                    <span>Вишня, красные ягоды, минеральные нюансы, пряности</span>
+                </div>
+                <div class="tasting-item">
+                    <span class="tasting-label">Вкус:</span>
+                    <span>Сухой, элегантный, минеральность, долгое послевкусие</span>
+                </div>
+                <div class="tasting-item">
+                    <span class="tasting-label">Гастрономия:</span>
+                    <span>Универсальное розе, морепродукты, птица, аперитив</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="price-box">
+            <div class="price-label">Цена (*)</div>
+            <div class="price-value">7800&#x20BD;</div>
+            <div class="price-disclaimer">(*) цена не является офертой, уточняйте в торговом зале</div>
+        </div>
+        
+        <div class="actions">
+            <a href="https://totgoose.ru" class="action-button">Забронировать</a>
+        </div>
+        
+        <div class="footer-links">
+            <a href="https://wine.totgoose.ru" class="footer-link">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3C9.79 3 8 4.79 8 7C8 9 9 10.5 10 11V14H7V15H17V14H14V11C15 10.5 16 9 16 7C16 4.79 14.21 3 12 3ZM12 5C13.1 5 14 5.9 14 7C14 8.5 13 9.5 12 10C11 9.5 10 8.5 10 7C10 5.9 10.9 5 12 5ZM9 17V19H15V17H9Z"/>
+                </svg>
+                Винная карта
+            </a>
+            <a href="https://yandex.ru/maps/org/tot_yeshchyo_gus/240625638253/" class="footer-link">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Валовая 26
+            </a>
+            <a href="tel:+79999262688" class="footer-link">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+                +7 (9999) 26-26-88
+            </a>
+            <a href="https://menu.totgoose.ru" class="footer-link">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
+                </svg>
+                Меню
+            </a>
+            <a href="https://t.me/totgooserestocafe" class="footer-link">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                Telegram
+            </a>
+        </div>
+        
+        <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Af6acc35f39f04314ae5135916ccc71a32f937ef470795668349455d8c92847f9&amp;source=constructor" allowfullscreen="true"></iframe>
+        </div>
+    </div>
+</body>
+</html>
