@@ -1,0 +1,48 @@
+name: Generate and Update sitemap.xml
+
+on:
+  push:
+    branches: [main]          # или master, твоя основная ветка
+  workflow_dispatch:          # кнопка Run workflow вручную
+
+permissions:
+  contents: write             # нужно, чтобы коммитить sitemap обратно
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository (с полной историей)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # обязательно! для правильных <lastmod>
+
+      - name: Generate sitemap.xml
+        id: generate          # чтобы получить outputs
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://wine.totgoose.ru/ # ← обязательно измени!
+          # Примеры:
+          #   https://ivanivanov.github.io/my-site/
+          #   https://ivanivanov.github.io/ (если репозиторий называется ivanivanov.github.io)
+          #   https://www.mysite.com/       (если кастомный домен)
+
+          # Полезные опции (раскомментируй, если нужно):
+          # drop-html-extension: true              # убирать .html из URL → /about/ вместо /about.html
+          # include-pdf: false                     # не включать PDF
+          # additional-extensions: jpg png gif     # добавить картинки (но обычно не нужно)
+          # exclude-paths: private/ test/ old.html # исключить папки/файлы
+          # date-only: true                        # <lastmod> только дата без времени
+
+      - name: Commit sitemap.xml if changed
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          git add sitemap.xml || true
+          if git diff --staged --quiet; then
+            echo "sitemap.xml не изменился → ничего не коммитим"
+          else
+            git commit -m "chore: update sitemap.xml [ci skip]"
+            git push origin HEAD
+          fi
