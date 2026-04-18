@@ -3963,5 +3963,41 @@
         document.body.style.overflow = 'hidden';
     }
 </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> 
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Проверяем, открыты ли мы именно внутри Telegram Web App
+    if (window.Telegram && window.Telegram.WebApp) {
+        
+        // Перехватываем все клики по ссылкам на странице
+        document.body.addEventListener('click', (event) => {
+            const link = event.target.closest('a');
+            
+            // Если клик был не по ссылке — выходим
+            if (!link) return;
+
+            const url = link.href;
+
+            // 1. Если ссылка ведет на наш текущий сайт (внутренний переход)
+            if (url.startsWith(window.location.origin)) {
+                // Предотвращаем стандартный переход (который может выкинуть в Safari)
+                event.preventDefault();
+                
+                // Используем History API для плавного перехода без перезагрузки окна Web App
+                window.location.href = url; 
+                // Примечание: если у вас SPA (React/Vue), здесь лучше вызвать функцию роутера, например: router.push(url);
+            } 
+            // 2. Если ссылка ведет на другой сайт (например, с меню переходим на вино)
+            else {
+                // Предотвращаем открытие в системном браузере
+                event.preventDefault();
+                
+                // Открываем во встроенном браузере Telegram (всплывающее окно сверху)
+                window.Telegram.WebApp.openLink(url);
+            }
+        });
+    }
+});
+</script> 
 </body>
 </html>
