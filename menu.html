@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МЕНЮ | ТОТ ЕЩЁ ГУСЬ</title>
+    <link rel="icon" href="https://img.totgoose.ru/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(145deg, #faf8f5 0%, #f0ebe3 100%);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: linear-gradient(145deg, #faf8f5 0%, #f0ebe3 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .logo-image {
+            width: 177px;
+            height: 230px;
+            margin-right: 10px;
+        }
+
+        .header-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-nav a {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 30px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .header-nav a:hover {
+            color: #d9534f;
+        }
+
+        .header-contacts {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .phone-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .phone-link i {
+            color: #d9534f;
+        }
+
+        .address-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .address-link:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin-top: 8px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .social-icons a {
+            color: #333;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #d9534f;
+        }
+
+        @media (max-width: 960px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .header-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        .wl-container {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: linear-gradient(145deg, #faf8f5 0%, #f0ebe3 100%);
+            line-height: 1.5;
+            box-sizing: border-box;
+        }
+
+        .wl-main-title {
+            text-align: center;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            color: #000;
+            padding-bottom: 20px;
+        }
+         .hr-shelf {
+            margin: -30px auto 40px;
+            height: 50px;
+            border: none;
+            border-bottom: 1px solid #8b0000;
+            box-shadow: 0 20px 20px -20px #8b0000;
+            width: 70%;    
+            margin-bottom: 40px;
+        }
+      .wl-section-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-transform: uppercase;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            color: #8b0000;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .wl-section-footer {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            color: #8b0000;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .wl-subsection-title {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #555;
+            border-left: 4px solid #8b0000;
+            padding-left: 10px;
+            font-weight: bold;
+        }
+
+        .wl-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px 20px;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .wl-grid:last-child {
+            border-bottom: none;
+        }
+
+        .wl-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wl-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .wl-name:hover {
+            color: #8b0000;
+        }
+
+        .wl-details {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .wl-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #8b0000;
+            white-space: nowrap;
+            text-align: right;
+            min-width: 80px;
+        }
+
+        @media (max-width: 600px) {
+            .wl-container {
+                padding: 15px;
+            }
+            
+            .wl-main-title { 
+                font-size: 24px; 
+                letter-spacing: 1px;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .wl-main-title .separator {
+                display: none;
+            }
+            
+            .wl-section-title { 
+                font-size: 18px; 
+                margin-top: 30px;
+                margin-bottom: 30px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .wl-section-title .separator {
+                display: none;
+            }
+            
+            .wl-grid {
+                grid-template-columns: 1fr;
+                gap: 5px;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .wl-price {
+                text-align: left;
+                margin-top: 5px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .wl-main-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="https://totgoose.ru" class="header-logo">
+            <img src="https://totgoose.github.io/img/goose.png" alt="Гусь" class="logo-image">
+        </a>
+
+        <nav class="header-nav">
+            <ul>
+                <li><a href="menu.html" >МЕНЮ  </a></li>
+                <li><a href="menu_dinner.html" >ОБЕД  </a></li>
+                <li><a href="index.html" >ВИННАЯ КАРТА</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-contacts">
+            <a href="tel:+79999262688" class="phone-link">
+                <i class="fas fa-phone-alt"></i>
+                +7 (9999) 26-26-88
+            </a>
+            
+            <a href="https://yandex.ru/maps/org/tot_yeshchyo_gus/240625638253/" target="_blank" class="address-link">
+                <i class="fas fa-map-marker-alt" style='font-size:24px ; color:red'></i>
+                Мск , Валовая , 26
+            </a>
+
+            <div class="social-icons">
+                <a href="https://vk.com/totgooserestocafe" target="_blank" title="VK">
+                    <i class='fab fa-vk' style='font-size:30px;color:red'></i>
+                </a>
+                <a href="https://t.me/totgooserestocafe" target="_blank" title="Telegram">
+                    <i class='fab fa-telegram-plane' style='font-size:30px;color:red'></i>
+                </a>
+                <a href="https://www.totgoose.ru/blog" target="_blank" title="Blog">
+                   <i class='fas fa-blog' style='font-size:30px;color:red'></i>
+                </a>
+                <a href="https://www.totgoose.ru" target="_blank" title="totgoose.ru">
+                   <i class="fa fa-internet-explorer" style="font-size:30px;color:red"></i>
+                </a>
+                <a href="mailto:totgoose@ya.ru" target="_blank" title="totgoose@ya.ru">
+                  <i class="fa fa-envelope" style="font-size:30px;color:red"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="wl-container">
+       
+        
+        <h1 class="wl-main-title">МЕНЮ ТОТ ЕЩЁ ГУСЬ</h1>
+        <hr class="hr-shelf">
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+
+        <div class="wl-section-title">Горячие блюда</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/rebro.html"  class="wl-name">Ребро</a>
+                <span class="wl-details">Копченое на ольховой стружке говяжье ребро, приготовленное на низкой температуре. Подается с соусом из розового перца и пюре из пастернака</span>
+            </div>
+            <div class="wl-price">2200 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/ossobuko.html"  class="wl-name">Оссобуко</a>
+                <span class="wl-details">Стейк из поперечного разреза говяжьей голени с мозговой косточкой, приготовленный на низкой температуре. Подаётся с соусом и гарниром из жаренного фенхеля</span>
+            </div>
+            <div class="wl-price">2200 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/sheya-yagnyonka.html"  class="wl-name">Шея ягнёнка</a>
+                <span class="wl-details">Томлённая на низкой температуре с солодовым соусом и бренди. Подаётся с жареным луком порей и бейби-картофелем (на двоих)</span>
+            </div>
+            <div class="wl-price">3900 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/vymya-gril.html"  class="wl-name">Вымя гриль</a>
+                <span class="wl-details">Жареное говяжье вымя с перечным соусом и цветной капустой</span>
+            </div>
+            <div class="wl-price">1450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/yazyk-molochnogo-telenka.html"  class="wl-name">Язык молочного теленка</a>
+                <span class="wl-details">Глазированный язык теленка с опаленным романо и луком-конфи</span>
+            </div>
+            <div class="wl-price">990 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/kot-dyu-byof.html"  class="wl-name">Кот дю Бёф</a>
+                <span class="wl-details">Говяжий антрекот на кости с томатным чимичури и печёным чесноком (на двоих)</span>
+            </div>
+            <div class="wl-price">3950 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/telyachiy-zheludok-so-smorchkami.html"  class="wl-name">Телячий желудок со сморчками</a>
+                <span class="wl-details">Желудок, томленный в грибном бульоне, со сморчками в соусе из мадеры</span>
+            </div>
+            <div class="wl-price">1250 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/pochki-yagnenka-v-kherese.html"  class="wl-name">Почки ягненка в хересе</a>
+                <span class="wl-details">Почки в хересе Pedro Ximenez и солодовом соусе со спагетти из цуккини</span>
+            </div>
+            <div class="wl-price">950 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/kosti.html"  class="wl-name">Кости</a>
+                <span class="wl-details">«Сахарная» мозговая говяжья кость, запечённая с розмарином и чесноком</span>
+            </div>
+            <div class="wl-price">1750 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/barani-yaytsa-s-sousom-subiz.html"  class="wl-name">Бараньи яйца с соусом Субиз</a>
+                <span class="wl-details">Семенники ягненка, жареные с розмарином и чесноком, с соусом Субиз и петрушкой-фри</span>
+            </div>
+            <div class="wl-price">980 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/steyk-iz-govyazhey-pecheni.html"  class="wl-name">Стейк из говяжьей печени</a>
+                <span class="wl-details">Говяжья печень гриль Medium Rare с лимонным луком и медово-горчичным соусом</span>
+            </div>
+            <div class="wl-price">1350 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/utinaya-grudka-magre.html"  class="wl-name">Утиная грудка Магре</a>
+                <span class="wl-details">Жареная утиная грудка по-французски с бейби морковкой и цитрусовым соусом</span>
+            </div>
+            <div class="wl-price">1150 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/ryabchik.html"  class="wl-name">Рябчик</a>
+                <span class="wl-details">Целая птичка почти без костей со спагетти из корня сельдерея</span>
+            </div>
+            <div class="wl-price">1900 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Тапасы и брускетты</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/kreker-s-anchousom-i-tsukkini-s-myagkim-syrom.html"  class="wl-name">Крекер с анчоусом и цуккини с мягким сыром</a>
+                <span class="wl-details"> Хрустящий крекер с солёной рыбой, свежими кабачками и нежным сыром </span>
+            </div>
+            <div class="wl-price">140 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/kreker-s-syrnym-mussom-iz-paltusa-i-tuntsa-i-shchuchey-ikroy.html"  class="wl-name">Крекер с сырным муссом из палтуса и тунца и щучьей икрой</a>
+                <span class="wl-details">Хрустящая основа с воздушным рыбным кремом и красной икрой</span>
+            </div>
+            <div class="wl-price">140 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/brusketta-lukom-konfi-i-myagkim-syrom.html"  class="wl-name">Брускетта луком конфи и мягким сыром</a>
+                <span class="wl-details">Поджаренный багет с карамелизированным луком и сливочным сыром </span>
+            </div>
+            <div class="wl-price">420 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/brusketta-s-opalyonnym-tuntsom.html"  class="wl-name">Брускетта с опалённым тунцом</a>
+                <span class="wl-details">Тост с слегка обжаренным свежим тунцом   </span>
+            </div>
+            <div class="wl-price">680 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/brusketta-s-gusem.html"  class="wl-name">Брускетта с гусем</a>
+                <span class="wl-details">Томленный в хересе гусь, вяленые томаты, апельсиновый конфитюр на бриошь</span>
+            </div>
+            <div class="wl-price">890 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/utinye-susi-4-sht.html"  class="wl-name">Утиные «суси» (4 шт.)</a>
+                <span class="wl-details">Тонкие слайсы 12-дневной вяленой утиной грудки на сушеной черной сливе</span>
+            </div>
+            <div class="wl-price">590 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Холодные закуски</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/pate-iz-utinoy-pecheni-s-fua-gra.html"  class="wl-name">Пате из утиной печени с Фуа-гра</a>
+                <span class="wl-details">С луком конфи, томлёном в утином жиру</span>
+            </div>
+            <div class="wl-price">950 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/pashtet-iz-govyazhey-pecheni.html"  class="wl-name">Паштет из говяжьей печени</a>
+                <span class="wl-details">Со сливочным эспуме из белых грибов</span>
+            </div>
+            <div class="wl-price">560 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/riet-iz-atlanticheskoy-skumbrii.html"  class="wl-name">Риет из атлантической скумбрии</a>
+                <span class="wl-details">С домашней Рикоттой, Тепенаде, щучьей икрой и тостами из Бриошь</span>
+            </div>
+            <div class="wl-price">860 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/livanskiy-khumus.html"  class="wl-name">Ливанский хумус</a>
+                <span class="wl-details">С маринованным Романо и артишоками</span>
+            </div>
+            <div class="wl-price">580 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/salat-s-krabom.html"  class="wl-name">Салат с крабом</a>
+                <span class="wl-details">Филе 1-й фаланги краба с чатни из манго, клубникой и лимонно-сливочным эспуме</span>
+            </div>
+            <div class="wl-price">1750 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/bolshoy-zelenyy-salat.html"  class="wl-name">Большой зеленый салат</a>
+                <span class="wl-details">Листья салата, авокадо, молодой стручковый горошек, брокколи, цуккини кунжутная заправка</span>
+            </div>
+            <div class="wl-price">950 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/pâté-en-croute.html"  class="wl-name">Pâté en croute</a>
+                <span class="wl-details">Мясной пирог из гуся, фермерского петуха, говяжьей вырезки и костного мозга (лионская кухня)</span>
+            </div>
+            <div class="wl-price">980 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/govyazhiy-rostbif.html"  class="wl-name">Говяжий ростбиф</a>
+                <span class="wl-details">Слайсы вырезки на низкой температуре с печеным чесноком, вялеными томатами, горчичным соусом на кремовом сыре</span>
+            </div>
+            <div class="wl-price">980 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Сырое мясо и рыба</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/tartar-iz-govyazhey-vyrezki.html"  class="wl-name">Тартар из говяжьей вырезки</a>
+                <span class="wl-details">С мостардой и эспуме из сыра Грано Падано</span>
+            </div>
+            <div class="wl-price">980 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/seviche-iz-morskogo-grebeshka.html"  class="wl-name">Севиче из морского гребешка</a>
+                <span class="wl-details">Сахалинский гребешок с огурцом, соком юдзу, фенхелем и виноградом</span>
+            </div>
+            <div class="wl-price">1850 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/tartar-iz-lososya.html"  class="wl-name">Тартар из лосося</a>
+                <span class="wl-details">С заправкой из Саке и эспуме из Биска</span>
+            </div>
+            <div class="wl-price">1350 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Горячие закуски</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/volovan-à-la-bourguignonne.html"  class="wl-name">Волован À la bourguignonne</a>
+                <span class="wl-details">Корзинка из слоеного теста с бычьими хвостами в Pinot Noir и сливочным соусом из белых грибов</span>
+            </div>
+            <div class="wl-price">1450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/byush-de-shevr.html"  class="wl-name">Бюш-Де-Шевр</a>
+                <span class="wl-details">Жареный козий сыр с плесенью, чатни из хурмы, клубника, инжирная мастарда</span>
+            </div>
+            <div class="wl-price">960 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/kish-s-krabom.html"  class="wl-name">Киш с крабом</a>
+                <span class="wl-details">Горячий тарт с морепродуктами и мясом камчатского краба</span>
+            </div>
+            <div class="wl-price">950 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/steyk-iz-kapusty.html"  class="wl-name">Стейк из капусты</a>
+                <span class="wl-details">Жареная капуста с ароматными травами и копченой сметаной</span>
+            </div>
+            <div class="wl-price">720 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/frantsuzskiy-lukovyy-pirog.html"  class="wl-name">Французский луковый пирог</a>
+                <span class="wl-details">Карамелизированный лук шалот на слоеном тесте</span>
+            </div>
+            <div class="wl-price">650 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/zharenaya-fua-gra.html"  class="wl-name">Жареная Фуа-гра</a>
+                <span class="wl-details">С фундуком, яблоками в меде и соусом из киви и манго</span>
+            </div>
+            <div class="wl-price">2400 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Супы</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/frantsuzskiy-lukovyy-sup-zapechennyy.html"  class="wl-name">Французский луковый суп (запеченный)</a>
+                <span class="wl-details">По классическому лионскому рецепту</span>
+            </div>
+            <div class="wl-price">650 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/marselskiy-sup.html"  class="wl-name">Марсельский суп</a>
+                <span class="wl-details">Томатный суп с фенхелем, кальмарами, мидиями, лососем, палтусом и креветками</span>
+            </div>
+            <div class="wl-price">1250 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Основные блюда</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/file-minon-so-smorchkami.html"  class="wl-name">Филе-миньон со сморчками</a>
+                <span class="wl-details">Говяжья вырезка со сморчками в сливочном соусе и жареным цуккини</span>
+            </div>
+            <div class="wl-price">1850 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/befstroganov-iz-govyazhey-vyrezki.html"  class="wl-name">Бефстроганов из говяжьей вырезки</a>
+                <span class="wl-details">В сметано-томатном соусе с коньяком, с пюре из батата и битыми огурцами</span>
+            </div>
+            <div class="wl-price">1250 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/losos.html"  class="wl-name">Лосось</a>
+                <span class="wl-details">Филе на коже Medium Rare с жареным картофелем и шпинатом</span>
+            </div>
+            <div class="wl-price">1650 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/paltus.html"  class="wl-name">Палтус</a>
+                <span class="wl-details">Филе со сливочно-луковым соусом с Мадерой и пастой фрегола</span>
+            </div>
+            <div class="wl-price">1650 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/morskoy-grebeshok.html"  class="wl-name">Морской гребешок</a>
+                <span class="wl-details">Жареный с пюре Рамеско Верде и цитрусовой заправкой</span>
+            </div>
+            <div class="wl-price">2900 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Постное меню</div><hr class="hr-shelf">
+        <div class="wl-subsection-title">Холодные</div>
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/karpachcho-iz-tsvetnoy-kapusty.html"  class="wl-name">Карпаччо из цветной капусты</a>
+                <span class="wl-details">С трюфельной заправкой, муссом из цветной капусты и миндалем</span>
+            </div>
+            <div class="wl-price">680 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/karpachcho-iz-svekly.html"  class="wl-name">Карпаччо из свеклы</a>
+                <span class="wl-details">С соусом «Винегрет», водорослями Нури и кедровыми орешками</span>
+            </div>
+            <div class="wl-price">620 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/livanskiy-khumus-2.html"  class="wl-name">Ливанский хумус</a>
+                <span class="wl-details">С маринованным Романо и артишоками</span>
+            </div>
+            <div class="wl-price">580 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/bolshoy-zelenyy-salat-2.html"  class="wl-name">Большой зеленый салат</a>
+                <span class="wl-details">Листья салата, авокадо, горошек, брокколи, цуккини кунжутная заправка</span>
+            </div>
+            <div class="wl-price">950 ₽</div>
+        </div>
+
+        <div class="wl-subsection-title">Суп</div>
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/sup-iz-chechevitsy.html"  class="wl-name">Суп из чечевицы</a>
+                <span class="wl-details">С карри на кокосовых сливках, лаймом, мятой и кинзой</span>
+            </div>
+            <div class="wl-price">650 ₽</div>
+        </div>
+
+        <div class="wl-subsection-title">Горячее</div>
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/kartofelnyy-rosti-s-gribami.html"  class="wl-name">Картофельный рости с грибами</a>
+                <span class="wl-details">Швейцарское блюдо из тертого картофеля с вешенками и постной сметаной</span>
+            </div>
+            <div class="wl-price">850 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/steyk-iz-kapusty-2.html"  class="wl-name">Стейк из капусты</a>
+                <span class="wl-details">Жареная капуста с травами и постной сметаной</span>
+            </div>
+            <div class="wl-price">620 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/fetuchini-s-belymi-gribami.html"  class="wl-name">Фетучини с белыми грибами</a>
+                <span class="wl-details">Соус из уваренных белых грибов и оливкового масла</span>
+            </div>
+            <div class="wl-price">990 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/pshyonnaya-kasha.html"  class="wl-name">Пшённая каша</a>
+                <span class="wl-details">С мускатной тыквой и вялеными томатами</span>
+            </div>
+            <div class="wl-price">690 ₽</div>
+        </div>
+
+        <div class="wl-subsection-title">Десерт</div>
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/sladkaya-tykva.html"  class="wl-name">Сладкая тыква</a>
+                <span class="wl-details">Запеченная тыква с соусом Маракуйя и карамелизированным пеканом</span>
+            </div>
+            <div class="wl-price">750 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Десерты</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/crème-brûlée.html"  class="wl-name">Crème Brûlée</a>
+                <span class="wl-details">Классический французский сливочный десерт с Фуа-Гра и клубникой</span>
+            </div>
+            <div class="wl-price">950 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/beyliz-milfey.html"  class="wl-name">Бейлиз мильфей</a>
+                <span class="wl-details">Коржи из бездрожжевого теста с бейлиз-кремом и малиновым соусом</span>
+            </div>
+            <div class="wl-price">790 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/persikovyy-tart-s-gorgonzoloy.html"  class="wl-name">Персиковый тарт с Горгонзолой</a>
+                <span class="wl-details">Слоёный пирог с персиком в бальзамическом соусе, с ванильным мороженым</span>
+            </div>
+            <div class="wl-price">760 ₽</div>
+        </div>
+
+        <img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+        <div class="wl-section-title">Безалкогольные напитки</div><hr class="hr-shelf">
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/limonad-tsitrusovyy-300ml.html"  class="wl-name">Лимонад Цитрусовый 300мл</a>
+                <span class="wl-details">Освежающий прохладительный напиток с ярким кисло-сладким вкусом цитрусовых фруктов. Подаётся охлаждённым, идеально утоляет жажду</span>
+            </div>
+            <div class="wl-price">390 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/naturalnyy-yagodnyy-mors.html"  class="wl-name">Натуральный ягодный морс</a>
+                <span class="wl-details">Малина, клубника, чёрная смородина</span>
+            </div>
+            <div class="wl-price">390 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/voda-sairme-05l.html"  class="wl-name">Вода «Sairme» 0,5л</a>
+                <span class="wl-details">Без газа / с газом</span>
+            </div>
+            <div class="wl-price">300 ₽</div>
+        </div>
+
+        <div class="wl-subsection-title">Чай 900 мл</div>
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/chernyy.html"  class="wl-name">Черный</a>
+                <span class="wl-details">Классический крепкий чай с насыщенным вкусом и ароматом</span>
+            </div>
+            <div class="wl-price">450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/zelenyy-sencha.html"  class="wl-name">Зеленый сенча</a>
+                <span class="wl-details">Японский зелёный чай с травянистым вкусом и лёгкой терпкостью</span>
+            </div>
+            <div class="wl-price">450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/zelenyy-s-zhasminom.html"  class="wl-name">Зеленый с жасмином</a>
+                <span class="wl-details">Нежный зелёный чай с цветочным ароматом жасмина</span>
+            </div>
+            <div class="wl-price">450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/molochnyy-ulun.html"  class="wl-name">Молочный улун</a>
+                <span class="wl-details">Полуферментированный тайваньский чай с кремовым послевкусием</span>
+            </div>
+            <div class="wl-price">450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/bergamot.html"  class="wl-name">Бергамот</a>
+                <span class="wl-details">Чёрный чай с цитрусовой ноткой бергамота (Эрл Грей)</span>
+            </div>
+            <div class="wl-price">450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/travyanoy.html"  class="wl-name">Травяной</a>
+                <span class="wl-details">Сбор из лекарственных трав без кофеина</span>
+            </div>
+            <div class="wl-price">450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/klyukvennyy.html"  class="wl-name">Клюквенный</a>
+                <span class="wl-details">Ягодный чай с кисло-сладким вкусом клюквы</span>
+            </div>
+            <div class="wl-price">950 ₽</div>
+        </div>
+
+        <div class="wl-subsection-title">Кофе</div>
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/amerikano-espresso.html"  class="wl-name">Американо, эспрессо</a>
+                <span class="wl-details">Arabica</span>
+            </div>
+            <div class="wl-price">250 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/kapuchino-dvoynoy-espresso.html"  class="wl-name">Капучино, двойной эспрессо</a>
+                <span class="wl-details">Arabica  + Any Milk</span>
+            </div>
+            <div class="wl-price">450 ₽</div>
+        </div>
+
+        <div class="wl-grid">
+            <div class="wl-info">
+                <a href="https://wine.totgoose.ru/latte.html"  class="wl-name">Латте</a>
+                <span class="wl-details">Arabica  + Any Milk</span>
+            </div>
+            <div class="wl-price">550 ₽</div>
+        </div>
+
+ <hr class="hr-shelf">   </div>
+<img src="https://img.totgoose.ru/goose.png" alt="Гусь" style="display: block; margin: 0 auto 20px auto; max-width: 200px;">
+    <div class="wl-section-footer">
+    
+        <a href="https://yandex.ru/maps/org/tot_yeshchyo_gus/240625638253/" target="_blank" style="color:inherit;text-decoration:none;">Валовая 26</a>
+        </br>
+        <a href="tel:+79999262688" target="_blank" style="color:inherit;text-decoration:none;">+ 7 (9999) 26-26-88</a>
+        </br>
+        <a href="https://totgoose.ru" target="_blank" style="color:inherit;text-decoration:none;">Тот-Ещё-Гусь.рф</a>
+    </div>
+
+</body>
+</html>
