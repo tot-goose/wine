@@ -1,0 +1,5391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:image" content="https://wine.totgoose.ru/og-wine-card.png">
+<meta property="og:title" content="Винная Карта — Тот Ещё Гусь | Гастрокафе">
+<meta property="og:description" content="Более 408 позиций вина со всего мира. Москва, Валовая, 26.">
+<title>Винная карта — Тот Ещё Гусь | Гастрокафе</title>
+<link rel="icon" href="https://Тот-Ещё-Гусь.РФ/img/favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f5;
+  --text: #1a1a1a;
+  --text-muted: #6b6560;
+  --text-light: #9a948e;
+  --accent: #8b7355;
+  --border: #e0d8cf;
+  --border-light: #ece6de;
+  --card: #ffffff;
+}
+
+/* Изоляция от Tilda */
+.tilda-wine-wrapper {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+}
+.tilda-wine-wrapper * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  padding: 3rem 1.5rem 1.5rem;
+}
+.header-sub {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.header-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+.header-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.header-line {
+  width: 40px; height: 1px;
+  background: var(--accent);
+  margin: 1.25rem auto;
+  opacity: 0.4;
+}
+.header-address {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,248,245,0.95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.5rem 0;
+}
+.nav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.nav-btn {
+  padding: 0.35rem 0.85rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-btn:hover { color: var(--text); background: var(--border-light); }
+.nav-btn.active { color: var(--card); background: var(--accent); }
+
+.section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+.section:not(:last-child) {
+  border-bottom: 1px solid var(--border-light);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.section-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ===== SUBSECTION ===== */
+.subsection {
+  margin-bottom: 1.5rem;
+}
+.subsection:last-child {
+  margin-bottom: 0;
+}
+.subsection-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  font-style: italic;
+}
+.subsection-wines {
+  /* container for subsection wines */
+}
+
+/* ===== ACCORDION WINE CARD ===== */
+.wine-card {
+ 
+  cursor: pointer;
+}
+.wine-card:last-child { border-bottom: none; }
+
+.wine-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 0;
+  user-select: none;
+}
+.wine-left { flex: 1; min-width: 0; }
+.wine-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.15rem;
+}
+.wine-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.wine-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-weight: 300;
+}
+.wine-meta {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+  letter-spacing: 0.02em;
+}
+.wine-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.wine-toggle {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.wine-card.open .wine-toggle {
+  transform: rotate(180deg);
+}
+
+/* Wine Details (hidden by default) */
+.wine-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.wine-card.open .wine-details {
+  max-height: 1000px;
+}
+.wine-details-inner {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.5);
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+}
+.wine-details-desc {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  font-weight: 300;
+}
+.wine-details-desc-more {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.wine-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.wine-spec {
+  font-size: 0.75rem;
+}
+.wine-spec-label {
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+.wine-spec-value {
+  color: var(--text);
+  font-weight: 500;
+}
+.wine-tasting {
+  font-size: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+  margin-bottom: 0.75rem;
+}
+.wine-tasting-item {
+  margin-bottom: 0.4rem;
+}
+.wine-tasting-label {
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.wine-tasting-text {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+.wine-pairing {
+  font-size: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+}
+.wine-pairing-label {
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.wine-pairing-text {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem 3rem;
+  border-top: 1px solid var(--border-light);
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+.footer-text {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 480px) {
+  .wine-header { flex-direction: column; gap: 0.2rem; }
+  .wine-price { align-self: flex-start; }
+  .section { padding: 2rem 1rem; }
+  .nav-inner { gap: 0.15rem; }
+  .nav-btn { padding: 0.3rem 0.6rem; font-size: 0.6rem; }
+  .wine-specs { grid-template-columns: 1fr 1fr; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.5s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="tilda-wine-wrapper">
+
+<div class="header">
+  <div class="header-sub">Гастрокафе "Тот ещё Гусь"</div>
+  <h1 class="header-title"><em>Винная</em> Карта</h1>
+  <div class="header-line"></div>
+  <div class="header-address">Москва, Валовая, 26</div>
+</div>
+
+
+
+
+<div class="section reveal" id="sec-0">
+  <h2 class="section-title">WINE BY THE GLASS</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">WHITE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Campelo Vinho Verde Portugal 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">580 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pavonero Bianco Toscana Italy 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">590 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Muscadet Sevre et Maine AOC Sur Lie Loire France 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">650 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Le Raz Cuvee Grand Chene South-West France 2016 (glass)</div>
+       
+      </div>
+      <div class="wine-price">690 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay Nube California USA 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Villa Neus Blanc J.Neus Rheinhessen Germany 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sauvignon Blanc The Kauri Tree Hawkes Bay New Zealand 2022 (glass)</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gruner Veltliner Terrassen Markus Huber Traisental Austria 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">760 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Louis Guntrum Dry Riesling Rheinhessen Germany 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">790 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chenin Blanc Seriously Cool Waterkloof Stellenbosch South Africa 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">840 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Kalk Chardonnay Nals Margreid Alto Adige Italy 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">960 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chenin Blanc Perdeberg Wines South Africa 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">640 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gewurztraminer River Route Pfalz Germany (Semi Sweet) 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">660 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Villa Neus Blanc J.Neus Rheinhessen Germany 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Balthasar Ress Von Unserm Rheingau Germany 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">790 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">SPARKLING</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cava Brut Vibracions Cavas Masachs Catalonia Spain 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Prosecco Superiore DOCG Brut Valdobbiadene Veneto Italy 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cremant de Limoux Cuvee Tradition Brut Languedoc-Roussillon France 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">920 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Kaapse Vonkel Brut Rose Simonsig Western Cape South Africa 2022 (glass)</div>
+       
+      </div>
+      <div class="wine-price">990 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">ROSE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-19">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Campelo Vinho Verde Rose Portugal 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">590 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-20">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Domaine Laffitte Cotes de Gascogne France 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">RED</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-21">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Termo De Lisboa Casa Santos Lima Portugal 2020 (glass)</div>
+       
+      </div>
+      <div class="wine-price">520 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-22">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Varas Tinto Lisboa Portugal 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">520 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-23">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Altos de la Hoya Olivares Jumilla Spain 2022 (glass)</div>
+       
+      </div>
+      <div class="wine-price">520 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-24">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chianti Monteguelfo Toscana Italy 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">590 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-25">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pinot Nero Trevenezie Veneto Italy 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-26">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Pomal Crianza Rioja Spain 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">770 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-27">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Zweigelt Domaene Gobelsburg Niederosterreich Austria 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">820 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-28">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Malbec Luigi Bosca Mendoza Argentina 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">870 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-29">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cotes du Rhone Chateau de Marjolet Rhone France 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">910 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-30">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Zinfandel Reserve Lodi California USA 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">960 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-31">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chianti Monteguelfo Toscana Italy 2024 (glass)</div>
+       
+      </div>
+      <div class="wine-price">590 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">CORAVIN WHITE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-32">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Eierfels Diel Nahe Germany 2022 (glass)</div>
+       
+      </div>
+      <div class="wine-price">1 770 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-33">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Lochle GG Weissburgunder Weingut Burg Ravensburg Baden Germany 2018 (glass)</div>
+       
+      </div>
+      <div class="wine-price">1 950 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-34">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay Domaine Agnes Paquet Bourgogne France 2022 (glass)</div>
+       
+      </div>
+      <div class="wine-price">2 400 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">CORAVIN RED</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-35">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cote de Nuits-Villages Bourgogne France 2020 (glass)</div>
+       
+      </div>
+      <div class="wine-price">1 990 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-36">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Citran Haut-Medoc France 2014 (glass)</div>
+       
+      </div>
+      <div class="wine-price">1 680 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-37">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Kasnostop Na Terracah Sikory Kuban Semigorye 2019 (glass)</div>
+       
+      </div>
+      <div class="wine-price">2 180 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-38">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateauneuf-du-Pape Gabriel Meffre Laurus Rhone France 2016 (glass)</div>
+       
+      </div>
+      <div class="wine-price">2 580 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">CORAVIN CLARET</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-39">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Picaro del Aguila Rose Vinas Viejas Dominio del Aguila Ribera del Duero Spain 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">2 380 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">CHAMPAGNE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-0-40">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Delot Blanc de Noirs Reserve Brut 2023 (glass)</div>
+       
+      </div>
+      <div class="wine-price">9 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-41">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Loriot-Pagel Carte d'Or Brut NV (glass)</div>
+       
+      </div>
+      <div class="wine-price">9 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-42">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bernard Remy Grand Cru Brut 2015 (glass)</div>
+       
+      </div>
+      <div class="wine-price">9 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-43">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Delot Rose Brut 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">9 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-44">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Henri Dosnon Brut Selection 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">10 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-45">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Forget-Brimont Brut 1-Cru NV (glass)</div>
+       
+      </div>
+      <div class="wine-price">10 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-46">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Delot Montre-Cul Blanc De Blancs Brut 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">10 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-47">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Loriot-Pagel Brut Nature 2017 (glass)</div>
+       
+      </div>
+      <div class="wine-price">11 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-48">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Meteyer Cuvee Marine Brut 2020 (glass)</div>
+       
+      </div>
+      <div class="wine-price">11 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-49">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Delot Cuvee Legende Brut 2022 (glass)</div>
+       
+      </div>
+      <div class="wine-price">12 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-50">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Loriot-Pagel Blanc De Blancs Brut Grand Cru 2020 (glass)</div>
+       
+      </div>
+      <div class="wine-price">13 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-51">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Henri Dosnon Original Brut Nature 2015 (glass)</div>
+       
+      </div>
+      <div class="wine-price">12 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-52">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Francis Boulard et Fille Les Murgiers Brut Nature NV (glass)</div>
+       
+      </div>
+      <div class="wine-price">13 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-53">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Drappier Brut Nature Zero Dosage NV (glass)</div>
+       
+      </div>
+      <div class="wine-price">15 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-54">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Laherte Freres Rose de Meunier Extra Brut NV (glass)</div>
+       
+      </div>
+      <div class="wine-price">16 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-55">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Joseph Loriot-Pagel Cuvee 6 Brut 2014 (glass)</div>
+       
+      </div>
+      <div class="wine-price">17 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-56">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bruno Paillard Premiere Cuvee Extra Brut NV (glass)</div>
+       
+      </div>
+      <div class="wine-price">18 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-57">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">A. Bergere Solera Blanc de Blanc 2021 (glass)</div>
+       
+      </div>
+      <div class="wine-price">19 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-58">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bruno Paillard Rose Premiere Cuvee Extra Brut NV (glass)</div>
+       
+      </div>
+      <div class="wine-price">23 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-59">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Ployez-Jacquemart Extra Brut Vintage Blanc de Blanc 2010 (glass)</div>
+       
+      </div>
+      <div class="wine-price">25 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-60">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bruno Paillard Blanc De Blancs Extra Brut 2014 (glass)</div>
+       
+      </div>
+      <div class="wine-price">29 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-0-61">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Henri Dosnon Millesime Brut 2009 (glass)</div>
+       
+      </div>
+      <div class="wine-price">42 200 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-1">
+  <h2 class="section-title">STILL WINES</h2>
+  <div class="wines">
+    
+  <div class="wine-card reveal" data-index="sec-1-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Enrosado Orange Altolandon Manchuela Spain 2021</div>
+       
+      </div>
+      <div class="wine-price">4 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-1-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Furmint Aus Dem Quarz Wenzel Burgenland Austria 2018</div>
+       
+      </div>
+      <div class="wine-price">4 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-1-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Naked Rose Weingut Heinrich Burgenland Austria 2020</div>
+       
+      </div>
+      <div class="wine-price">4 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-1-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Ribolla Simcic Marjan Goriska Brda Slovenia 2019</div>
+       
+      </div>
+      <div class="wine-price">5 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-1-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Muscateller Alte Reben mit Achtung Loimer Niederosterreich Austria 2021</div>
+       
+      </div>
+      <div class="wine-price">8 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-1-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Graue Freyheit Weingut Heinrich Burgenland Austria 2018</div>
+       
+      </div>
+      <div class="wine-price">8 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-1-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Traminer Alte Reben mit Achtung Loimer Niederosterreich Austria 2016</div>
+       
+      </div>
+      <div class="wine-price">9 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-1-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Eulogio Pomares Maceracion Con Pieles Zarate Rias Baixas Spain 2017</div>
+       
+      </div>
+      <div class="wine-price">13 600 ₽ </div>
+    </div>
+    
+  </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-2">
+  <h2 class="section-title">SAUVIGNON BLANC, CHENIN BLANC, MUSCADET & Co.</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">LOIRE VALLEY VARIETIES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-2-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chinon AOC Domaine Jean Maurice Raffault Loire France 2024</div>
+       
+      </div>
+      <div class="wine-price">4 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chenin Blanc Seriously Cool Waterkloof Stellenbosch South Africa 2023</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sauvignon Blanc Ned Marlborough New Zealand 2025</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sauvignon Blanc Sattlerhof SudSteiermark Austria 2022</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Muscadet Sevre et Maine Sur Lie Chateau Thebaut Haute Fevrie Loire 2020</div>
+       
+      </div>
+      <div class="wine-price">5 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Monetou-Salon Domaine La Clef du Recit Loire France 2023</div>
+       
+      </div>
+      <div class="wine-price">6 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sauvignon Blanc Reserve Domaine Ciringa Stajerska Slovenia 2018</div>
+       
+      </div>
+      <div class="wine-price">8 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sancerre L'Amiral Gitton Pere & Fils Loire France 2023</div>
+       
+      </div>
+      <div class="wine-price">8 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Saumur Domaine Guilberteau Loire France 2022</div>
+       
+      </div>
+      <div class="wine-price">9 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sancerre Silex Galinot Gitton Pere & Fils Loire France 2019</div>
+       
+      </div>
+      <div class="wine-price">11 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-2-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sancerre Silex Galinot Gitton Pere & Fils Loire France 2022</div>
+       
+      </div>
+      <div class="wine-price">11 300 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-3">
+  <h2 class="section-title">CHARDONNAY, PINOT BLANC & PINOT GRIS & Co.</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">BURGUNDIAN VARIETIES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-3-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Morillon Gamlitz Sattlerhof SudSteiermark Austria 2021</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay Santa Gemma Puglia Italy 2022</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Now Chardonnay Paxton McLaren Vale Australia 2021</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Grauburgunder Dreissigacker Rheinhessen Germany 2021</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pinot Blanc Eichelberg Weingut Heitlinger Baden Germany 2018</div>
+       
+      </div>
+      <div class="wine-price">6 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bad Boy Chardonnay Vin de Bordeaux France 2022</div>
+       
+      </div>
+      <div class="wine-price">6 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Aligote Les Astrelles AOC Les Lares Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">6 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chablis Domaine Louis Moreau Bourgogne France 2023</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pinot Grigio Lis Neris Friuli Isonzo Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Montany Les Vignes Derriere 1er Cru Domaine Stephane Aladame Bourgogne France 2017</div>
+       
+      </div>
+      <div class="wine-price">7 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">G Lot Chardonnay Luca Winery Tupungato Mendoza Argentina 2022</div>
+       
+      </div>
+      <div class="wine-price">7 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay Lis Neris Friuli Isonzo Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">7 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Macon-Verze Domaine de La Belouse Bourgogne France 2023</div>
+       
+      </div>
+      <div class="wine-price">7 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Arbois Chardonnay Domaine Rolet Jura France 2023</div>
+       
+      </div>
+      <div class="wine-price">7 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Morillon Muschelkalk SudSteiermark Austria 2022</div>
+       
+      </div>
+      <div class="wine-price">7 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Marsannay Saint-Jacques Fougeray de Beauclair Bourgogne France 2018</div>
+       
+      </div>
+      <div class="wine-price">9 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pinot Bianco Sirmian Nals-Margreid Sudtirol Alto Adige Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">9 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Filippe Chavy Chardonnay Bourgogne AOC France 2022</div>
+       
+      </div>
+      <div class="wine-price">9 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sonnenberg Bonnigheim Chardonnay 1G Dautel Wurttemberg Germany 2023</div>
+       
+      </div>
+      <div class="wine-price">9 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-19">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Lochle GG Weissburgunder Weingut Burg Ravensburg Baden Germany 2018</div>
+       
+      </div>
+      <div class="wine-price">9 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-20">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bouzeron Domaine Rois Mages Bourgogne France 2023</div>
+       
+      </div>
+      <div class="wine-price">11 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-21">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay Domaine Agnes Paquet Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">12 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-22">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay Grand Reserve Rossern Pfaffl Niederosterreich Austria 2021</div>
+       
+      </div>
+      <div class="wine-price">12 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-23">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay CrossBarn Sonoma Coast Napa Valley USA 2020</div>
+       
+      </div>
+      <div class="wine-price">12 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-24">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Macon-Davaye Pierre Naigeon Bourgogne France 2018</div>
+       
+      </div>
+      <div class="wine-price">12 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-25">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bourgogne Le Clos du Chateau Domaine de Montille Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">12 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-26">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chablis Fourchaume 1er Cru Domaine des Malandes Bourgogne France 2023</div>
+       
+      </div>
+      <div class="wine-price">14 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-27">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pouilly-Fuisse La Petite Parcelle Maison Auvigue Bourgogne France 2021</div>
+       
+      </div>
+      <div class="wine-price">14 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-28">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Saint-Romain Maison de Montille Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">15 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-29">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chassagne-Montrachet En Pimont Au Pied du Mont Chauve Bourgogne France 2020</div>
+       
+      </div>
+      <div class="wine-price">17 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-30">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chablis Vaudesir Grand Cru Domaine Louis Moreau 2018</div>
+       
+      </div>
+      <div class="wine-price">19 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-31">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Auxey-Duresses Blanc Cuvee Patience №14 Domaine Agnes Paquet Bourgogne 2021</div>
+       
+      </div>
+      <div class="wine-price">20 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-32">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chassagne-Montrachet 1er Cru Les Blanchots Dessous Coffinet-Duvernay 2018</div>
+       
+      </div>
+      <div class="wine-price">20 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-33">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Puligny-Montrachet 1er Cru Les Folatieres Domaine J.-L. Chavy Bourgogne France 2019</div>
+       
+      </div>
+      <div class="wine-price">23 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-34">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Batar Querciabella Toscana Italy 2022</div>
+       
+      </div>
+      <div class="wine-price">26 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-3-35">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Meursault-Genevrieres 1er Cru Hospices de Beaune Morey-Blanc, Cuvee B 2016</div>
+       
+      </div>
+      <div class="wine-price">43 000 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-4">
+  <h2 class="section-title">RIESLING, GRUNER VELTLINER & Co.</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">GERMAN & AUSTRIAN VARIETIES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-4-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Hold and Hollo Dry Tokaj Hungary 2023</div>
+       
+      </div>
+      <div class="wine-price">3 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gruner Veltliner Domaene Gobelsburg Kamptal Niederosterreich Austria 2024</div>
+       
+      </div>
+      <div class="wine-price">3 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gluegglich Weiss Loimer Niederosterreich Austria 2022</div>
+       
+      </div>
+      <div class="wine-price">4 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Nahesteiner Diel Nahe Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">5 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Bruno Dry Karthauserhof Mozel Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">5 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Trocken DQ Wittmann 100 Hugel Rheinhessen Germany 2024</div>
+       
+      </div>
+      <div class="wine-price">5 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Weisser Schiefer Welchriesling Qualitatswein Burgenland Austria 2018</div>
+       
+      </div>
+      <div class="wine-price">5 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Niersteiner Trocken Louis Guntrum Rheinhessen Germany 2023</div>
+       
+      </div>
+      <div class="wine-price">5 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Kerner Puntscheit Bozen Sudtirol Alto Adige Italy 2022</div>
+       
+      </div>
+      <div class="wine-price">5 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Muller Thurgau San Michele Appiano Alto Adige Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">5 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Leiten Gewurztraminer Nals Margreid Alto Adige Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">5 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Trocken Monchhof Grand Lay Mozel-Saar-Ruver Germany 2023</div>
+       
+      </div>
+      <div class="wine-price">5 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Loiserberg Langenlois Loimer Niederosterreich Austria 2018</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gruner Veltliner Obere Steigen Huber Traisental Austria 2023</div>
+       
+      </div>
+      <div class="wine-price">6 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Rudesheim Riesling Balthazar Ress Rheingau Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">6 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gewurztraminer Les Sorcieres Chateu de Riquewihir Dopff & Irion Alsace 2018</div>
+       
+      </div>
+      <div class="wine-price">7 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Schellenbrunnen Weingut Heitlinger Baden Germany 2019</div>
+       
+      </div>
+      <div class="wine-price">7 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Schweigen Julg Pfalz Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">8 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Eierfels Diel Nahe Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">8 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-19">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Alte Reben Van Volxem Mosel Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">9 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-20">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Ungsteiner Herrenberg GG Pfalz Germany 2021</div>
+       
+      </div>
+      <div class="wine-price">10 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-21">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gruner Veltliner Renner 1ste Lage Schloss Gobelsburg Kamptal Austria 2022</div>
+       
+      </div>
+      <div class="wine-price">11 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-22">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Heiligenstein Zobing 1OTW Schloss Gobelsburg Kamptal Austria 2021</div>
+       
+      </div>
+      <div class="wine-price">12 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-23">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Ruppertsberger Reiterpfad Hofstuck GG Pfalz Germany 2020</div>
+       
+      </div>
+      <div class="wine-price">12 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-4-24">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Hohenmorgen GG Dr. Burklin-Wolf Pfalz Germany 2018</div>
+       
+      </div>
+      <div class="wine-price">20 500 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-5">
+  <h2 class="section-title">RED/PINOT, GAMAY & ALIKE</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">BURGUNDY, JURA, SAVOIE VARIETIES & SIMILAR</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-5-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gamay Les Perdriettes Guy Allion Touraine Loire France 2023</div>
+       
+      </div>
+      <div class="wine-price">3 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gluegglich Rot Loimer Niederosterreich Austria 2022</div>
+       
+      </div>
+      <div class="wine-price">4 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pinot Noir Tradition Philipp Kuhn Pfalz Germany 2021</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Spatburgunder Muschelkalk Weingut J.Neus Rheinhessen Germany 2021</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Spatburgunder Holger Koch Kaiserstuhl Baden Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Morgon Georges Descombes Beaujolais Cru France 2021</div>
+       
+      </div>
+      <div class="wine-price">6 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Arbois Rouge Tradition Domaine Rolet Jura France 2023</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Moulin a Vent Domaine Richard Rottiers Beaujolais France 2021</div>
+       
+      </div>
+      <div class="wine-price">7 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Spatburgunder Tradition Kunstler Rheingau Germany 2022</div>
+       
+      </div>
+      <div class="wine-price">9 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cotes du Jura Jean Bourdy a Arlay Jura France 2018</div>
+       
+      </div>
+      <div class="wine-price">9 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cote de Nuits-Villages Bourgogne France 2020</div>
+       
+      </div>
+      <div class="wine-price">9 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Hautes Cotes de Nuits Au Vallon Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">10 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Savigny-les-Beaune Patriarche Bourgogne France 2018</div>
+       
+      </div>
+      <div class="wine-price">10 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Kirschgarten GG Pinot Noir Philipp Kuhn Pfalz Germany 2020</div>
+       
+      </div>
+      <div class="wine-price">12 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Saint-Aubin 1er Cru Le Charmois Au Pied du Mont Chauve Bourgogne 2017</div>
+       
+      </div>
+      <div class="wine-price">13 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Monthelie Domaine Pierre Morey Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">14 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Beaune Clos de la Maladiere Domaine Cauvard Burgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">14 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gevrey-Chambertin David Duband Bourgogne France 2020</div>
+       
+      </div>
+      <div class="wine-price">20 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Savigny-les-Beaune Les Goudelettes Domaine Antonin Guyon Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">16 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-19">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Ingelheimer Pares Spatburgunder J.Neus Rheinhessen Germany 2018</div>
+       
+      </div>
+      <div class="wine-price">16 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-20">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Aloxe-Corton Domaine Bruno Clair Bourgogne France 2020</div>
+       
+      </div>
+      <div class="wine-price">19 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-21">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Nuits-Saint-Georges Aux Saints-Juliens Domaine De Montille Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">20 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-22">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pommard Domaine Nicolas Rossignol Bourgogne France 2017</div>
+       
+      </div>
+      <div class="wine-price">21 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-23">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chassagne-Montrachet 1er Cru Clos Saint Jean Domaine Morey Coffinet Bourgogne France 2021</div>
+       
+      </div>
+      <div class="wine-price">21 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-24">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chassagne-Montrachet 1er Cru Clos Saint Jean Domaine Michel Niellin Bourgogne France 2016</div>
+       
+      </div>
+      <div class="wine-price">24 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-25">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gevrey-Chambertin Les Perrieres 1er Cru Pierre Naigeon Bourgogne France 2011</div>
+       
+      </div>
+      <div class="wine-price">30 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-26">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vosne-Romanee Domaine Jean Grivot Bourgogne France 2022</div>
+       
+      </div>
+      <div class="wine-price">31 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-27">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vosne-Romanee Chateau De Beaufort Premier Cru La Croix Rameau Bourgogne France 2009</div>
+       
+      </div>
+      <div class="wine-price">65 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-28">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Guy Allion Les Quatre Pierres Cabernet Franc AOP Loire France 2023</div>
+       
+      </div>
+      <div class="wine-price">3 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-29">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Naked Red Weingut Heinrich Burgenland Austria 2022</div>
+       
+      </div>
+      <div class="wine-price">4 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-30">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chinon Les Picasses Domaine Jean Maurice Raffault Loire France 2020</div>
+       
+      </div>
+      <div class="wine-price">4 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-31">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Blaufrankisch Trocken Johannes Trapl Carnuntum Austria 2019</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-32">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Kekfrankos Vincze Bela Meszhegy Hungary 2012</div>
+       
+      </div>
+      <div class="wine-price">5 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-33">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cuatro Pasos Black Martin Codax Bierzo Spain 2019</div>
+       
+      </div>
+      <div class="wine-price">6 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-34">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">St.Laurent Reserve Schloss Gobelsburg Kamptal Austria 2020</div>
+       
+      </div>
+      <div class="wine-price">10 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-35">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chinon Les Puy Domaine Jean Maurice Raffault Loire France 2017</div>
+       
+      </div>
+      <div class="wine-price">12 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-36">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bourgueil Les Perrieres Catherine & Pierre Breton Loire France 2017</div>
+       
+      </div>
+      <div class="wine-price">15 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-5-37">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Blaufrankisch Durrau Weninger Burgenland Austria 2008</div>
+       
+      </div>
+      <div class="wine-price">15 800 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-6">
+  <h2 class="section-title">RED</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">BURGUNDY, JURA, SAVOIE VARIETIES & SIMILAR</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-6-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Saint-Aubin 1er Cru Le Charmois Au Pied du Mont Chauve Bourgogne 2018</div>
+       
+      </div>
+      <div class="wine-price">16 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-6-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chassagne-Montrachet 1er Cru Clos Saint Jean Domaine Michel Niellon Bourgogne France 2016</div>
+       
+      </div>
+      <div class="wine-price">24 000 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-7">
+  <h2 class="section-title">CABERNET, MERLOT, PETIT VERDOT & Co.</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">BORDEAUX VARIETIES & BLENDS</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-7-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Beaulieu Comtes de Tastes Superieur Bergerac France 2019</div>
+       
+      </div>
+      <div class="wine-price">4 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Le Raz Cuvee Grand Chene Rouge Bergerac France 2014</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Tour Saint Bonnet Medoc France 2015</div>
+       
+      </div>
+      <div class="wine-price">5 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Laroche Bel Air Cotes de Bordeaux France 2010</div>
+       
+      </div>
+      <div class="wine-price">5 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Grand Village Bordeaux France 2020</div>
+       
+      </div>
+      <div class="wine-price">6 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Bernadotte Haut-Medoc France 2014</div>
+       
+      </div>
+      <div class="wine-price">6 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Fihl Merlot Peter Dipoli Alto Adige Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">7 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Citran Haut-Medoc France 2014</div>
+       
+      </div>
+      <div class="wine-price">8 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cabernet Sauvignon Lis Neris Friuli Isonzo Italy 2018</div>
+       
+      </div>
+      <div class="wine-price">8 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cask Selection Cavas de Weinert Bodegas Weinert Mendoza Argentina 2011</div>
+       
+      </div>
+      <div class="wine-price">9 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Poujeaux Moulis-en-Medoc France 2012</div>
+       
+      </div>
+      <div class="wine-price">11 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Turpino Querciabella Toscana Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">11 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Cos Labory Saint-Estephe France 2014</div>
+       
+      </div>
+      <div class="wine-price">11 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">La Dame de Malescot St.Exupery Grand Cru Classe Margaux France 2017</div>
+       
+      </div>
+      <div class="wine-price">15 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Geremia Rocca Di Montegrossi Toscana Italy 2018</div>
+       
+      </div>
+      <div class="wine-price">13 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cabernet Sauvignon CrossBarn Paul Hobbs Napa Valley USA 2018</div>
+       
+      </div>
+      <div class="wine-price">15 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau La Lagune Grand Cru Classe Haut-Medoc France 2017</div>
+       
+      </div>
+      <div class="wine-price">14 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Sociando-Mallet Haut-Medoc France 2006</div>
+       
+      </div>
+      <div class="wine-price">16 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Gombaude Guillot Pomerol France 2014</div>
+       
+      </div>
+      <div class="wine-price">18 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-19">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau d'Armailhac Pauillac Grand Cru Classe France 2016</div>
+       
+      </div>
+      <div class="wine-price">19 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-20">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Corbin St-Emilion Grand Cru Classe France 2005</div>
+       
+      </div>
+      <div class="wine-price">21 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-21">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bertinga Toscana Italy 2017</div>
+       
+      </div>
+      <div class="wine-price">22 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-22">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Saint-Pierre Grand Cru Classe Saint-Julien France 1996</div>
+       
+      </div>
+      <div class="wine-price">23 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-23">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Lafon-Rochet Grand Cru Classe Saint-Estephe France 2000</div>
+       
+      </div>
+      <div class="wine-price">24 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-24">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Talbot Saint-Julien Grand Cru Classe France 2015</div>
+       
+      </div>
+      <div class="wine-price">24 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-25">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Clos du Marquis Saint-Julien France 1995</div>
+       
+      </div>
+      <div class="wine-price">26 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-26">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Sociando-Mallet Haut-Medoc France 1995</div>
+       
+      </div>
+      <div class="wine-price">26 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-27">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Ferriere Margaux France 2005</div>
+       
+      </div>
+      <div class="wine-price">26 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-28">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Kirvan Grand Cru Classe Margaux France 2000</div>
+       
+      </div>
+      <div class="wine-price">29 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-29">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Gruaud Larose Grand Cru Classe Saint-Julien France 1994</div>
+       
+      </div>
+      <div class="wine-price">30 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-30">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Cos d'Estournel Rouge Saint-Estephe Grand Cru Classe France 2006</div>
+       
+      </div>
+      <div class="wine-price">50 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-31">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau du Retout Cru Bourgeois Haut-Medoc France 2016</div>
+       
+      </div>
+      <div class="wine-price">6 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-7-32">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Potensac Cru Bourgeois Medoc France 2008</div>
+       
+      </div>
+      <div class="wine-price">12 400 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-8">
+  <h2 class="section-title">NEBBIOLO, SANGIOVESE, NERELLO & Co.</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">PIEMONTE, TOSCANA & OTHER ITALIAN VARIETIES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-8-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Lange Nebbiolo Bricdelbaio Piemonte Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">5 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Calafata Scapigliato Toscana Italy 2022</div>
+       
+      </div>
+      <div class="wine-price">5 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Lohsa Morellino di Scansano Poliziano Toscana Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Agamium Colline Novaresi Antichi Vigneti di Cantalupo Piemonte Italy 2021</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sandro Fay Tei Rosso di Valtellina DOC Lombardy Italy 2021</div>
+       
+      </div>
+      <div class="wine-price">7 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vino Nobile di Montepulciano Poliziano Toscana Italy 2021</div>
+       
+      </div>
+      <div class="wine-price">8 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vignalparco Chianti Classico Riserva Casa Emma Toscana Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">8 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barolo Gramolere Manzone Piemonte Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">10 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Brunello di Montalcino p. 56 Tenuta Buon Tempo Toscana Italy 2012</div>
+       
+      </div>
+      <div class="wine-price">12 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barbaresco Serraboella Paitin Piemonte Italy 2017</div>
+       
+      </div>
+      <div class="wine-price">13 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Brunello di Montalcino Casanova di Neri Toscana Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">14 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barolo La Tartufaia Giulia Negri Piemonte Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">15 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barolo Bussia Barale Fratelli Piemonte Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">15 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Ghemme Collis Breclemae Antichi Vigneti di Cantalupo Piemonte Italy 2013</div>
+       
+      </div>
+      <div class="wine-price">16 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Punta Di Adine Toscana Italy 2017</div>
+       
+      </div>
+      <div class="wine-price">16 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Brunello di Montalcino p. 56 Tenuta Buon Tempo Toscana Italy 2018</div>
+       
+      </div>
+      <div class="wine-price">15 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-8-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barolo Bussia Barale Fratelli Piemonte Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">15 700 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-9">
+  <h2 class="section-title">TEMPRANILLO, TOURIGA & BLENDS</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">THREE RIVERS: EBRO, DUERO & DAO</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-9-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Marques De Abadia Reserva Rioja Spain 2016</div>
+       
+      </div>
+      <div class="wine-price">5 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Portal Colheita Quinta do Portal Douro Portugal 2021</div>
+       
+      </div>
+      <div class="wine-price">5 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Real Reserva Rioja Spain 2018</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Cubilloo Crianza Lopez de Heredia Rioja Spain 2016</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sierra Cantabria Reserva Rioja Spain 2017</div>
+       
+      </div>
+      <div class="wine-price">8 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Bosconia Reserva Lopez de Heredia Rioja Spain 2013</div>
+       
+      </div>
+      <div class="wine-price">9 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Picaro del Aguila Vinas Viejas Dominio del Aguila Ribera del Duero Spain 2022</div>
+       
+      </div>
+      <div class="wine-price">9 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Quinta da Pellada Alvaro Castro Dao Portugal 2012</div>
+       
+      </div>
+      <div class="wine-price">10 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Arzuaga Reserva Bodegas Arzuaga Ribera del Duero Spain 2020</div>
+       
+      </div>
+      <div class="wine-price">11 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pago de Carraovejas Finca Y Bdega Ribera del Duero Spain 2022</div>
+       
+      </div>
+      <div class="wine-price">12 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Tondonia Reserva Lopez de Heredia Rioja Spain 2012</div>
+       
+      </div>
+      <div class="wine-price">15 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pintia Bodegas y Vinedos Pintia Toro Spain 2019</div>
+       
+      </div>
+      <div class="wine-price">17 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Tondonia Gran Reserva Lopez de Heredia Rioja Spain 2001</div>
+       
+      </div>
+      <div class="wine-price">64 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Real Reserva Rioja Spain 2019</div>
+       
+      </div>
+      <div class="wine-price">6 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Arzuaga Reserva Bodegas Arzuaga Ribera del Duero Spain 2021</div>
+       
+      </div>
+      <div class="wine-price">14 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-9-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Tondonia Gran Reserva Lopez de Heredia Rioja Spain 2004</div>
+       
+      </div>
+      <div class="wine-price">64 000 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-10">
+  <h2 class="section-title">SYRAH, GRENACHE, MOURVEDRE, CARIGNAN</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">MEDITERRANIAN VARIETIES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-10-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Clos Gebrat Priorat Spain 2023</div>
+       
+      </div>
+      <div class="wine-price">3 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cuvee Auzan Chateau L'Ermite D'Auzan Costieres de Nimes Rhone France 2022</div>
+       
+      </div>
+      <div class="wine-price">3 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Syrah Vincze Bela Meszhegy Hungary 2016</div>
+       
+      </div>
+      <div class="wine-price">5 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Tenecity Shiraz Barossa Valley McLaren Vale Australia 2023</div>
+       
+      </div>
+      <div class="wine-price">5 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Maranones Bodega Maranones Madrid Spain 2020</div>
+       
+      </div>
+      <div class="wine-price">6 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Dido Venus la Universal Montsant Cataluna Spain 2021</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">El Mentridano Viticola Mentridana Castilla-La Mancha Spain 2022</div>
+       
+      </div>
+      <div class="wine-price">7 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Clos de Tafall Priorat Spain 2022</div>
+       
+      </div>
+      <div class="wine-price">8 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Venus la Universal Monsant Spain 2019</div>
+       
+      </div>
+      <div class="wine-price">10 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cote-Rotie La Germine Domaine Duclaux Rhone France 2019</div>
+       
+      </div>
+      <div class="wine-price">11 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateauneuf-du-Pape Gabriel Meffre Laurus Rhone France 2016</div>
+       
+      </div>
+      <div class="wine-price">15 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cims de Porrera Classic Perelada Priorat Spain 2017</div>
+       
+      </div>
+      <div class="wine-price">17 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-10-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Mas Martinet Els Escurcons Priorat Spain 2008</div>
+       
+      </div>
+      <div class="wine-price">27 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-11">
+  <h2 class="section-title">OTHER GREAT VARIETIES & TERROIRS</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">AUTOCHTHONES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-11-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Weingut Heitlinger Red Baden Germany 2018</div>
+       
+      </div>
+      <div class="wine-price">3 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Zweigelt Tradition Markus Huber Niederosterreich Austria 2021</div>
+       
+      </div>
+      <div class="wine-price">5 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Lirica Primitivo di Manduria Produttori di Manduria Puglia Italy 2021</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Favinia Le Sciabiche Sicily Italy 2015</div>
+       
+      </div>
+      <div class="wine-price">4 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bistro Fabien Jouves Cahors France 2018</div>
+       
+      </div>
+      <div class="wine-price">5 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Malbec Ultra Kaiken Mendoza Argentina 2021</div>
+       
+      </div>
+      <div class="wine-price">6 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Saperavi Rcheuli Qvevri Tchotiashvili Kakheti Georgia 2020</div>
+       
+      </div>
+      <div class="wine-price">6 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Zinfandel Federalist Lodi California USA 2023</div>
+       
+      </div>
+      <div class="wine-price">6 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Orgion Mavrodafni Sclavus Cephalonia Slopes de of Enos Greece 2020</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Aynat Nero d'Avola Canicatti Sicilia DOC Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">6 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">7 Fuentes Suertes del Marques Valle de la Orotava Tenerife Spain 2020</div>
+       
+      </div>
+      <div class="wine-price">7 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Xarello Finca Viladellops Massis del Garraf Penedes Spain 2024</div>
+       
+      </div>
+      <div class="wine-price">3 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Weingut Heitlinger White BIO Baden Germany 2021</div>
+       
+      </div>
+      <div class="wine-price">3 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Badacsonyors Keknyelu Szolobirtok Hungary 2018</div>
+       
+      </div>
+      <div class="wine-price">4 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Alvarinho Muros Antigos DOC Vinho Verde Moncao Melgaco Portugal 2024</div>
+       
+      </div>
+      <div class="wine-price">4 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Langhe Arneis Barale Fratelli Piemonte Italy 2024</div>
+       
+      </div>
+      <div class="wine-price">5 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vacqueyras Domaine Le Colombier Rhone France 2021</div>
+       
+      </div>
+      <div class="wine-price">5 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Albarino Zarate Rias Baixas Spain 2023</div>
+       
+      </div>
+      <div class="wine-price">5 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">O Estranxeiro Godello Fento Wines Ribeira Sacra Spain 2023</div>
+       
+      </div>
+      <div class="wine-price">5 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-19">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Xarel-lo XX Finca Viladellops Massis del Garraf Penedes Spain 2021</div>
+       
+      </div>
+      <div class="wine-price">6 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-20">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Terraviva Mario's 47 Trebbiano d'Abruzzo Superiore Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">6 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-21">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gavi Sole sul Poggio Il Poggio Piemonte Italy 2018</div>
+       
+      </div>
+      <div class="wine-price">6 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-22">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Arbois Tradition Domaine Rolet Jura France 2023</div>
+       
+      </div>
+      <div class="wine-price">6 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-23">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vermentino Colli Di Luni Etichetta Nera Lunae Bosoni Liguria Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">7 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-24">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Primus Quinta da Pellada Dao Portugal 2014</div>
+       
+      </div>
+      <div class="wine-price">9 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-25">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Tondonia Reserva Lopez de Heredia Rioja Spain 2013</div>
+       
+      </div>
+      <div class="wine-price">15 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-11-26">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Zinfandel Buena Vista Sonoma California USA 2023</div>
+       
+      </div>
+      <div class="wine-price">6 800 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-12">
+  <h2 class="section-title">ROSE</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">GREAT PINK</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-12-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Suez Spatburgunder Rose Reichsrat von Buhl Pfalz Germany 2017</div>
+       
+      </div>
+      <div class="wine-price">7 800 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">COMMON PINK</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-12-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">La Riviera Domaine de la Sangliere AOP Cotes de Provence France 2022</div>
+       
+      </div>
+      <div class="wine-price">4 300 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">CLARET</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-12-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sainte Cecile Rose Chateau L'Ermite D'Auzan Costieres de Nimes Rhone France 2023</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-12-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Picaro del Aguila Claret Vinas Viejas Dominio del Aguila Ribera del Duero Spain 2023</div>
+       
+      </div>
+      <div class="wine-price">11 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-13">
+  <h2 class="section-title">OTHER CLASSIC BUBBLES</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">SPAIN</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-13-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cava Reserva Brut La Vida Penedes Cataluna 2021</div>
+       
+      </div>
+      <div class="wine-price">4 600 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">METHODE COL FONDO</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-13-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Prosecco Asolo Free Run Spumante Sui Lieviti Corvezzo Veneto Italy 2022</div>
+       
+      </div>
+      <div class="wine-price">5 700 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">METHODE CHARMAT</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-13-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Prosecco di Valdobbiadene Superiore Marca Oro Valdo Veneto Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">ITALY</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-13-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Rotari Blanc de Blanc Extra Brut Trentodoc 2018</div>
+       
+      </div>
+      <div class="wine-price">5 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">La Piemontina Societa Semplice Agricola Extra Brut Piemont 2018</div>
+       
+      </div>
+      <div class="wine-price">9 700 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">GERMANY/AUSTRIA</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-13-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sekt Riesling Brut Barth Rheingau 2019</div>
+       
+      </div>
+      <div class="wine-price">7 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sekt Tradition Brut Raumland Rheinhessen 2010</div>
+       
+      </div>
+      <div class="wine-price">10 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sekt Blanc de Blancs Schloss Gobelsburg Niederosterreich 2021</div>
+       
+      </div>
+      <div class="wine-price">12 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sekt Pinot Noir Red Brut Barth Rheingau 2015</div>
+       
+      </div>
+      <div class="wine-price">10 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sekt Rose Reserve Brut Raumland Rheinhessen 2014</div>
+       
+      </div>
+      <div class="wine-price">11 600 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">FRANCE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-13-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Blanquette de Limoux Cuvee Tradition Brut Delmas Languedoc-Roussillon France 2022</div>
+       
+      </div>
+      <div class="wine-price">4 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cremant de Die Brut Monge Granon Rhona 2021</div>
+       
+      </div>
+      <div class="wine-price">4 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cremant d'Alsace Brut Louis Sipp 2022</div>
+       
+      </div>
+      <div class="wine-price">5 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cremant de Bourgogne Brut Domaine Les Astrelles NV</div>
+       
+      </div>
+      <div class="wine-price">6 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cremant de Bourgogne Brut Rose Chartron Frebuchet 2022</div>
+       
+      </div>
+      <div class="wine-price">6 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-13-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cremant d'Alsace Extra Brut Zero Dosage Dopff & Iron NV</div>
+       
+      </div>
+      <div class="wine-price">7 400 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-14">
+  <h2 class="section-title">AMBER & LOW INTERVENTION</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">BUBBLES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-14-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Ancestrale Vensame Bio Tenuta Santa Lucia Emilia-Romagna Italia 2019</div>
+       
+      </div>
+      <div class="wine-price">4 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-14-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pet-nat Puro Rosato Lavacchio Toscana Italia 2021</div>
+       
+      </div>
+      <div class="wine-price">4 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-15">
+  <h2 class="section-title">RUSSIAN WINE</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">BUBBLES</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-15-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Red Brut Nature Usadba Perovskih Sevastopol 2022</div>
+       
+      </div>
+      <div class="wine-price">4 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Temelion Brut Rose Kuban Krimsk 2019</div>
+       
+      </div>
+      <div class="wine-price">7 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Usadba Divnomorskoe Brut Grande Cuvee Gelendzhik 2021</div>
+       
+      </div>
+      <div class="wine-price">8 500 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">WHITE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-15-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Déjà Vu Riesling Lefkadia Valley 2021</div>
+       
+      </div>
+      <div class="wine-price">3 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">ESSE Unplugged Rkatsiteli Orange Satera Crimea 2023</div>
+       
+      </div>
+      <div class="wine-price">3 600 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Katya Viognier Belmas Sevastopol 2022</div>
+       
+      </div>
+      <div class="wine-price">3 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Muscat Rem Akchurin Sevastopol 2021</div>
+       
+      </div>
+      <div class="wine-price">4 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chardonnay Rem Akchurin Sevastopol 2021</div>
+       
+      </div>
+      <div class="wine-price">4 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Belmas Sevastopol 2024</div>
+       
+      </div>
+      <div class="wine-price">4 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Kokur Orange Usadba Perovskih Sevastopol 2022</div>
+       
+      </div>
+      <div class="wine-price">5 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cosmos Orange Yaiyla Urban Winery Sevastopol 2021</div>
+       
+      </div>
+      <div class="wine-price">5 300 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">RED</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-15-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pinot Noir Sikory Kuban Semigorye 2023</div>
+       
+      </div>
+      <div class="wine-price">4 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Mourvedre Red Klen de Gai-Kodzor Kuban Anapa 2020</div>
+       
+      </div>
+      <div class="wine-price">4 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">44 Parallel Usadba Perovskih Sevastopol 2022</div>
+       
+      </div>
+      <div class="wine-price">5 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cosmos Pinot Noir Yaiyla Urban Winery Sevastopol 2020</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Pinot Noir Krasnaia Gorka Galitskiy & Galitskiy Kuban Anapa 2022</div>
+       
+      </div>
+      <div class="wine-price">5 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Colline Krinica Kuban Gelendzhik 2021</div>
+       
+      </div>
+      <div class="wine-price">6 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cosaque Krasnaia Gorka Galitskiy & Galitskiy Kuban Anapa 2022</div>
+       
+      </div>
+      <div class="wine-price">7 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-15-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Krasnostop Na Terracah Sikory Kuban Semigorye 2019</div>
+       
+      </div>
+      <div class="wine-price">10 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-16">
+  <h2 class="section-title">SWEET WINE</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">SPANISH WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-16-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Apasionado de Jose Pariente Rueda Spain 2021</div>
+       
+      </div>
+      <div class="wine-price">6 300 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">AUSTRIAN WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-16-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">BA T Beerenauslese Tement SudSteiermark Austria 2017</div>
+       
+      </div>
+      <div class="wine-price">6 800 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-17">
+  <h2 class="section-title">BABY BOTTLES</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">GERMAN WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-17-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Riesling Bone Dry Germany 2023</div>
+       
+      </div>
+      <div class="wine-price">2 700 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">AUSTRIAN WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-17-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Loimer Pinot Noir Kamptal Austria 2022</div>
+       
+      </div>
+      <div class="wine-price">3 500 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">FRENCH WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-17-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Les Romains Sancerre Loire France 2022</div>
+       
+      </div>
+      <div class="wine-price">4 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-17-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateauneuf-Du-Pape Domaine Chante Cigale Rhone France 2023</div>
+       
+      </div>
+      <div class="wine-price">4 500 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-17-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Champagne Le Murgiers Extra Brut France 2019</div>
+       
+      </div>
+      <div class="wine-price">9 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-17-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Champagne Bruno Paillard Premiere Cuvee Extra Brut France 2020</div>
+       
+      </div>
+      <div class="wine-price">11 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-17-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chateau Brane-Cantenac 2 Grand Cru Classe Margaux France 2004</div>
+       
+      </div>
+      <div class="wine-price">13 800 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">SPANISH WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-17-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Vina Tondonia Reserva Lopez de Heredia Rioja Spain 2012</div>
+       
+      </div>
+      <div class="wine-price">7 300 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">ITALIAN WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-17-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barolo DOCG Casa Fondata Piemonte Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">8 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-17-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">La Marega Amarone della Valpolicella DOCG Classico Veneto Italy 2018</div>
+       
+      </div>
+      <div class="wine-price">9 800 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-18">
+  <h2 class="section-title">BIG VOLUME BOTTLES</h2>
+  <div class="wines">
+    
+  <div class="wine-card reveal" data-index="sec-18-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Origine Brut Valdo Veneto Italy 2023</div>
+       
+      </div>
+      <div class="wine-price">8 700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-18-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Prosecco di Valdobbiadene Superiore Marca Oro Valdo Brut Veneto Italy 2021</div>
+       
+      </div>
+      <div class="wine-price">12 300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-18-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Prosecco di Valdobbiadene Superiore Marca Oro Valdo Brut Veneto Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">21 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-18-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Centuno Nero d'Avola Canicatti Sicilia Italy 2019</div>
+       
+      </div>
+      <div class="wine-price">9 900 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-18-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gorgoli Terre del Bruno Toscana Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">13 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-18-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Chianti Riserva Poggio al Falchi Toscana Italy 2020</div>
+       
+      </div>
+      <div class="wine-price">11 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-18-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Brunello di Montalcino Tenuta Buon Tempo Toscana Italy 2018</div>
+       
+      </div>
+      <div class="wine-price">25 000 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-18-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barolo Acclivi Comm G B Burlotto Piemonte Italy 2017</div>
+       
+      </div>
+      <div class="wine-price">35 000 ₽ </div>
+    </div>
+    
+  </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-19">
+  <h2 class="section-title">DIGESTIVES</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">PORTO</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Porto Royal Oporto Ruby 50ml</div>
+       
+      </div>
+      <div class="wine-price">450 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Porto Royal Oporto Tawny 50ml</div>
+       
+      </div>
+      <div class="wine-price">450 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Porto Calem Fine White 50ml</div>
+       
+      </div>
+      <div class="wine-price">450 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Porto Royal Oporto Late Bottled Vintage 50ml</div>
+       
+      </div>
+      <div class="wine-price">550 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Porto Royal Oporto Colheita 2004 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 300 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">MADEIRA</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Madeira Malmsey 10 Years Old Cossart Gordon 50ml</div>
+       
+      </div>
+      <div class="wine-price">930 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-6">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Madeira Full Rich Good Company Cossart Gordon 50ml</div>
+       
+      </div>
+      <div class="wine-price">390 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">BAROLO CHINATO</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-7">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Barolo Chinato 50ml</div>
+       
+      </div>
+      <div class="wine-price">950 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">SHERRY</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-8">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sherry Macarena Mansanilla 50ml</div>
+       
+      </div>
+      <div class="wine-price">310 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-9">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sherry Oloroso Rio Viejo 50ml</div>
+       
+      </div>
+      <div class="wine-price">350 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-10">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sherry Oloroso Seco Alfonso 50ml</div>
+       
+      </div>
+      <div class="wine-price">550 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-11">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sherry Leonor Palo Cortado 12 YO 50ml</div>
+       
+      </div>
+      <div class="wine-price">550 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-12">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sherry Valdespino Pedro Ximenez El Candado 50ml</div>
+       
+      </div>
+      <div class="wine-price">560 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-13">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sherry Valdespino Palo Cortado VOS 20 yo 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-14">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Sherry Oloroso Cream Vors Matusalem 1989 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">ICE WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-15">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Eiswein Dulce Enero de Altolandon DO Manchuela 75ml</div>
+       
+      </div>
+      <div class="wine-price">840 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">TOKAJI</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-16">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Tokaji Aszu 6 Puttonyos Grof Degenfeld Hungary 75ml</div>
+       
+      </div>
+      <div class="wine-price">1 650 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">GRAPPA</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-17">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Grappa Vite d'Oro Classica/Barrique Bepi Tosolini 50ml</div>
+       
+      </div>
+      <div class="wine-price">650 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-18">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Grappa Nonino Vendemmia Riserva Italy 50ml</div>
+       
+      </div>
+      <div class="wine-price">650 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-19">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Grappa Nonino Riserva 5 Y.O. Antica Cuvee Italy 50ml</div>
+       
+      </div>
+      <div class="wine-price">860 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-20">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Grappa Riserva Sherry Wood Finish Sibona Italy 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 200 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">CALVADOS</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-21">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Calvados Daron Pays D'Auge Fine 50ml</div>
+       
+      </div>
+      <div class="wine-price">650 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-22">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Calvados Pays D'Auge Pere Magloire VSOP 50ml</div>
+       
+      </div>
+      <div class="wine-price">890 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-23">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Calvados Pays D'Auge Pere Magloire XO 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 600 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">BRANDY</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-24">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Brandy Torres 15 Reserva Privada 50ml</div>
+       
+      </div>
+      <div class="wine-price">580 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">COGNAC</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-25">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cognac Leyrat VSOP 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 500 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">ARMAGNAC</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-26">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Blanche d'Armagnac AOC Domaine d'Esperance 50ml</div>
+       
+      </div>
+      <div class="wine-price">950 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-27">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Bas-Armagnac de Pontiac 1973 50ml</div>
+       
+      </div>
+      <div class="wine-price">2 400 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-28">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Grand Armagnac Janneau 1972 50ml</div>
+       
+      </div>
+      <div class="wine-price">2 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">RUM</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-29">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Rum Diplomatico Botucal Venezuela 50ml</div>
+       
+      </div>
+      <div class="wine-price">850 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">LIQUEUR</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-30">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Esperance Floc de Gascogne 50ml</div>
+       
+      </div>
+      <div class="wine-price">470 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-31">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Mirto di Sardegna 50ml</div>
+       
+      </div>
+      <div class="wine-price">380 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-32">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Amaro Carciofo Sesibon 50ml</div>
+       
+      </div>
+      <div class="wine-price">300 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-33">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Amaro Tosolini 50ml</div>
+       
+      </div>
+      <div class="wine-price">670 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-34">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Fernet Vittone 50ml</div>
+       
+      </div>
+      <div class="wine-price">320 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">WHISKY</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-35">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Whisky Bulleit Bourbon 50ml</div>
+       
+      </div>
+      <div class="wine-price">700 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-36">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Whisky Jack Daniel's Tennessee 50ml</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-37">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Whisky Monkey Shoulder 50ml</div>
+       
+      </div>
+      <div class="wine-price">620 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-38">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Whisky Glenfiddich 12 y.o. Single Malt Scotch 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 200 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-39">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Whisky Dalmore Port Wood Reserve 50ml</div>
+       
+      </div>
+      <div class="wine-price">2 100 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-40">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Whisky Loch Lomond 12 y.o. 50ml</div>
+       
+      </div>
+      <div class="wine-price">850 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-41">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Whisky Macallan Double Cask 12 y.o. 50ml</div>
+       
+      </div>
+      <div class="wine-price">1 600 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">GIN</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-42">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gin Hendrick's Amazonia Scotland 50ml</div>
+       
+      </div>
+      <div class="wine-price">950 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-43">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Killepitsch 50ml</div>
+       
+      </div>
+      <div class="wine-price">420 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">UMESHU</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-44">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Zakuro Umeshu Nara Prefecture Japan 90ml</div>
+       
+      </div>
+      <div class="wine-price">850 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-19-45">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Yoi Umeko Okayama Japan 100ml</div>
+       
+      </div>
+      <div class="wine-price">1 300 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">CAKE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-19-46">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Cake Iku's Shiro Tottori Japan 125ml</div>
+       
+      </div>
+      <div class="wine-price">2 100 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-20">
+  <h2 class="section-title">BOTTLED BEER</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">BOTTLED BEER</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-20-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Якорь Belgian Style Tripel Россия 330ml</div>
+       
+      </div>
+      <div class="wine-price">550 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-20-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">La Trappe Dubbel Netherlands 330ml</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-20-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Steinbrau Pilsener Germany 500ml</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-20-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Weihenstephaner Hefeweissbier Germany 500ml</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-20-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Якорь. Светлое Шардоне Брют Россия 330ml</div>
+       
+      </div>
+      <div class="wine-price">1 800 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-20-5">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Якорь. Светлое Рислинг Брют Россия 330ml</div>
+       
+      </div>
+      <div class="wine-price">1 800 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-21">
+  <h2 class="section-title">COCKTAILS</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">COCKTAILS</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-21-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Aperol Spritz/Апероль Шприц 180ml</div>
+       
+      </div>
+      <div class="wine-price">950 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-21-1">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Negroni/Негрони 105ml</div>
+       
+      </div>
+      <div class="wine-price">890 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-21-2">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Martini Dry/Мартини Драй 90ml</div>
+       
+      </div>
+      <div class="wine-price">750 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-21-3">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Porto Tonic/Порто Тоник 180ml</div>
+       
+      </div>
+      <div class="wine-price">850 ₽ </div>
+    </div>
+    
+  </div>
+  <div class="wine-card reveal" data-index="sec-21-4">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Gin and Tonic/Джин Тоник 250ml</div>
+       
+      </div>
+      <div class="wine-price">950 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section reveal" id="sec-22">
+  <h2 class="section-title">NO ALCOHOL</h2>
+  <div class="wines">
+    
+    <div class="subsection">
+      <div class="subsection-title">GERMAN WINE</div>
+      <div class="subsection-wines">
+        
+  <div class="wine-card reveal" data-index="sec-22-0">
+    <div class="wine-header">
+      <div class="wine-left">
+        
+        <div class="wine-name">Von Buhl Zero Secco Pfalz Germany 2025</div>
+       
+      </div>
+      <div class="wine-price">3 900 ₽ </div>
+    </div>
+    
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-name">Тот Ещё Гусь</div>
+  <div class="footer-text">ГАСТРОКАФЕ · МОСКВА</div>
+</div>
+
+</div><!-- /.tilda-wine-wrapper -->
+
+<script>
+(function() {
+  const wrapper = document.querySelector('.tilda-wine-wrapper');
+  
+  // Wine card accordion
+  const wineCards = wrapper.querySelectorAll('.wine-card');
+  wineCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Don't close if clicking on a link inside
+      if (e.target.closest('a')) return;
+      
+      // Toggle current card
+      this.classList.toggle('open');
+    });
+  });
+  
+  // Nav buttons
+  const navBtns = wrapper.querySelectorAll('.nav-btn');
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = wrapper.getElementById(btn.dataset.target);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    });
+  });
+  
+  // Section observer for nav highlighting
+  const sections = wrapper.querySelectorAll('.section');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navBtns.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.target === entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-10% 0px -70% 0px' });
+  sections.forEach(s => navObserver.observe(s));
+  
+  // Reveal animation
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.05 });
+  wrapper.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+})();
+</script>
+
+</body>
+</html>
