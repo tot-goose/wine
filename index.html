@@ -28,7 +28,197 @@
   --border-light: #ece6de;
   --card: #ffffff;
 }
+/* Age Verification Modal - Light Theme */
+.age-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
 
+.age-modal-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.age-modal {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 50px 40px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 40px rgba(139, 0, 0, 0.05);
+    position: relative;
+    animation: modalSlideIn 0.5s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.age-modal::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.3), transparent, rgba(139, 0, 0, 0.1));
+    border-radius: 8px;
+    z-index: -1;
+}
+
+.age-modal-logo {
+    width: 177px;
+    height: auto;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.age-modal-title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 28px;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.age-modal-subtitle {
+    font-size: 18px;
+    color: #8b0000;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.age-modal-text {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    font-style: italic;
+}
+
+.age-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.age-btn {
+    padding: 15px 35px;
+    border: 2px solid #8b0000;
+    background: transparent;
+    color: #333;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    min-width: 140px;
+}
+
+.age-btn:hover {
+    background: #8b0000;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 0, 0, 0.2);
+}
+
+.age-btn.confirm {
+    background: #8b0000;
+    color: #fff;
+}
+
+.age-btn.confirm:hover {
+    background: #d9534f;
+    border-color: #d9534f;
+}
+
+.age-btn.deny {
+    border-color: #ccc;
+    color: #666;
+}
+
+.age-btn.deny:hover {
+    background: #f5f5f5;
+    border-color: #999;
+    color: #333;
+}
+
+.age-modal-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.3), transparent);
+    margin: 30px 0;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.age-warning {
+    font-size: 12px;
+    color: #999;
+    margin-top: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile Age Modal */
+@media (max-width: 768px) {
+    .age-modal {
+        padding: 35px 25px;
+    }
+
+    .age-modal-title {
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+
+    .age-modal-subtitle {
+        font-size: 16px;
+    }
+
+    .age-modal-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .age-btn {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .age-modal-title {
+        font-size: 20px;
+    }
+}
 /* Изоляция от Tilda */
 .tilda-wine-wrapper {
   font-family: 'Inter', sans-serif;
@@ -348,7 +538,27 @@
 </style>
 </head>
 <body>
-
+<!-- Age Verification Modal -->
+<div id="ageModal" class="age-modal-overlay">
+    <div class="age-modal">
+        <img src="https://totgoose.github.io/img/goose.png" alt="Гусь" class="age-modal-logo">
+        <h2 class="age-modal-title">Вам уже есть 18?</h2>
+        <p class="age-modal-subtitle">Подтвердите возраст</p>
+        
+        <div class="age-modal-divider"></div>
+        
+        <p class="age-modal-text">
+            Содержимое данного сайта предназначено только для лиц достигших совершеннолетнего возраста
+        </p>
+        
+        <div class="age-modal-buttons">
+            <button class="age-btn confirm" onclick="confirmAge()">Да, мне 18+</button>
+            <button class="age-btn deny" onclick="denyAge()">Нет, мне нет 18</button>
+        </div>
+        
+        <p class="age-warning">Продажа алкоголя несовершеннолетним запрещена</p>
+    </div>
+</div>
 <div class="tilda-wine-wrapper">
 
 <div class="header">
@@ -5344,6 +5554,22 @@
 </div><!-- /.tilda-wine-wrapper -->
 
 <script>
+function confirmAge() {
+        document.getElementById('ageModal').classList.add('hidden');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('ageVerified', 'true');
+    }
+    
+    function denyAge() {
+        window.location.href = 'https://totgoose.ru';
+    }
+    
+    if (sessionStorage.getItem('ageVerified') === 'true') {
+        document.getElementById('ageModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    } else {
+        document.body.style.overflow = 'hidden';
+    }
 (function() {
   const wrapper = document.querySelector('.tilda-wine-wrapper');
   
